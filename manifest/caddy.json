@@ -2,12 +2,12 @@
   "$schema": "https://raw.githubusercontent.com/volantvm/volant/main/docs/schemas/plugin-manifest-v1.json",
   "schema_version": "1.0",
   "name": "caddy",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "runtime": "caddy",
   "enabled": true,
   "initramfs": {
-    "url": "https://github.com/volantvm/initramfs-plugin-example/releases/download/v0.1.2/plugin.cpio.gz",
-    "checksum": "c258d065d9b5f72c0232626c59f89dff13d63e67c282ab8906907a1be9682a82"
+    "url": "https://github.com/volantvm/initramfs-plugin-example/releases/download/v0.1.0/plugin.cpio.gz",
+    "checksum": "deba6998b5852a4fbdc07f47b52be03fe1479233f9f12775d6c9a14705139ba7"
   },
   "resources": {
     "cpu_cores": 1,
