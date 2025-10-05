@@ -24,7 +24,7 @@ Use it as a template for your own stateless services, API servers, or edge workl
 
 ```bash
 # Install the plugin
-volar plugins install --manifest https://github.com/volantvm/initramfs-plugin-example/releases/download/v0.1.3/caddy.json
+volar plugins install --manifest https://github.com/volantvm/initramfs-plugin-example/releases/latest/download/caddy.json
 
 # Run it
 volar vms create web --plugin caddy --cpu 1 --memory 512
