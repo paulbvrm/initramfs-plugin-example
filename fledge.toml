@@ -1,0 +1,14 @@
+version = "1"
+strategy = "initramfs"
+
+[agent]
+source_strategy = "release"
+version = "latest"
+
+[source]
+busybox_url = "https://github.com/shutingrz/busybox-static-binaries-fat/raw/refs/heads/main/busybox-x86_64-linux-gnu"
+busybox_sha256 = "5c566ba50a12d8020a391346575534e818a1f5b6f729a53b7b241262fe1d1b4e"
+
+[mappings]
+"payload/caddy" = "/usr/bin/caddy"
+"payload/Caddyfile" = "/etc/caddy/Caddyfile"

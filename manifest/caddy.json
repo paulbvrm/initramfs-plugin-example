@@ -1,0 +1,34 @@
+{
+  "$schema": "https://raw.githubusercontent.com/volantvm/volant/main/docs/schemas/plugin-manifest-v1.json",
+  "schema_version": "1.0",
+  "name": "caddy",
+  "version": "0.1.2",
+  "runtime": "caddy",
+  "enabled": true,
+  "initramfs": {
+    "url": "https://github.com/volantvm/initramfs-plugin-example/releases/download/v0.1.2/plugin.cpio.gz",
+    "checksum": "c258d065d9b5f72c0232626c59f89dff13d63e67c282ab8906907a1be9682a82"
+  },
+  "resources": {
+    "cpu_cores": 1,
+    "memory_mb": 512
+  },
+  "workload": {
+    "type": "http",
+    "entrypoint": [
+      "/usr/bin/caddy",
+      "run",
+      "--config",
+      "/etc/caddy/Caddyfile"
+    ],
+    "base_url": "http://127.0.0.1:80",
+    "workdir": "/",
+    "env": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    }
+  },
+  "health_check": {
+    "endpoint": "/",
+    "timeout_ms": 10000
+  }
+}

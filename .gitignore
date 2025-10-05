@@ -1,0 +1,22 @@
+# Build artifacts
+plugin.cpio.gz
+*.cpio
+*.cpio.gz
+
+# Downloaded binaries (fetched during build)
+payload/caddy
+payload/*.tar.gz
+payload/*.zip
+
+# Temporary files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Editor directories
+.vscode/
+.idea/
+
+# fledge build directories
+.fledge/

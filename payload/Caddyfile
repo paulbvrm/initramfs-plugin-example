@@ -1,0 +1,6 @@
+{                                                                                                                                             
+        admin off                                                                                                                             
+}                                                                                                                                             
+:80 {                                                                                                                                         
+        respond "Hello from Caddy in a Volant microVM! 🚀"                                                                                    
+}  
