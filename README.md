@@ -303,6 +303,18 @@ Use OCI rootfs when:
 
 ---
 
+## Manage Artifacts via API
+
+Volant exposes a plugin artifacts API for programmatic management:
+
+- List: `GET /api/v1/plugins/caddy/artifacts?version=v1`
+- Upsert: `POST /api/v1/plugins/caddy/artifacts` (JSON body with `version`, `artifact_name`, `kind`, `source_url`, `checksum`, `format`, `local_path`, `size_bytes`)
+- Delete: `DELETE /api/v1/plugins/caddy/artifacts?version=v1`
+
+Refer to the Volant OpenAPI at `/openapi` for full schema.
+
+---
+
 ## License
 
 **Apache License 2.0**
